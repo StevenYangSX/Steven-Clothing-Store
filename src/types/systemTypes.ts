@@ -5,7 +5,13 @@ export interface Category {
 }
 
 export interface UserAuthType {
-  uid:string,
-  email: string | null,
-  displayName:string
+  uid: string;
+  email: string | null;
+  displayName: string;
+}
+
+export interface ProductType {
+  name: string;
+  price: number;
+  imageUrl: string;
 }
