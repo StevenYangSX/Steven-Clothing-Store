@@ -15,3 +15,12 @@ export interface ProductType {
   price: number;
   imageUrl: string;
 }
+
+
+
+export  interface CartStateType  {
+  isCartOpen: boolean,
+  cartItems: Array<any>,
+  cartCount: number,
+  cartTotal: number,
+};
