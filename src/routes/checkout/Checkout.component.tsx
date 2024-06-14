@@ -1,12 +1,18 @@
-import React, { useContext, useEffect } from "react";
-import { CartContext } from "../../context/CartContext";
+import { useEffect } from "react";
 import CheckoutItem from "../../components/checkout-item/CheckoutItem";
 import "./checkout.styles.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCartItems, selectCartTotal } from "../../store/cart/cartSelector";
+import { setIsCartOpen } from "../../store/cart/cartAction";
 const Checkout = () => {
-  const { cartItems, cartTotal, setIsCartOpen } = useContext(CartContext);
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
+  const cartTotal = useSelector(selectCartTotal);
+
   useEffect(() => {
-    setIsCartOpen(false);
+    dispatch(setIsCartOpen(false));
   }, []);
+
   return (
     <div className="checkout-container">
       <div className="checkout-header">
@@ -26,7 +32,7 @@ const Checkout = () => {
           <span>Remove</span>
         </div>
       </div>
-      {cartItems.map((cartItem) => (
+      {cartItems.map((cartItem: any) => (
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
       <div className="total">TOTAL: ${cartTotal}</div>
