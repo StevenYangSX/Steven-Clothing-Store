@@ -4,6 +4,7 @@ import "./checkout.styles.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems, selectCartTotal } from "../../store/cart/cartSelector";
 import { setIsCartOpen } from "../../store/cart/cartAction";
+import PaymentForm from "../../components/payment-form/PaymentForm.component";
 const Checkout = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
@@ -36,6 +37,7 @@ const Checkout = () => {
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
       <div className="total">TOTAL: ${cartTotal}</div>
+      <PaymentForm />
     </div>
   );
 };
