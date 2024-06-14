@@ -25,8 +25,9 @@ import { UserAuthType } from "../../types/systemTypes";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDvzqvtcqfItQY8VuqAkJCqpc6LpZMZ5tk",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "clothing-store-db-abaaf.firebaseapp.com",
   projectId: "clothing-store-db-abaaf",
   storageBucket: "clothing-store-db-abaaf.appspot.com",
