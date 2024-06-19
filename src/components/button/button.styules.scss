@@ -30,6 +30,10 @@
       background-color: #357ae8;
       border: none;
     }
+
+    @media (max-width: 600px) {
+      margin-top: 20px;
+    }
   }
 
   &.inverted {

@@ -1,16 +1,15 @@
-import { useContext, useState } from "react";
-
+import { useState } from "react";
 import FormInput from "../form-input/FormInput.component";
 import Button from "../button/Button.component";
-
 import {
   signInWithGooglePopup,
   createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.util";
-
-import { UserContext } from "../../context/UserContext";
 import "./signinForm.styles.scss";
+import { MessageProps } from "../../types/systemTypes";
+import Message from "../message/Message";
+
 const defaultFormFields = {
   email: "",
   password: "",
@@ -19,7 +18,7 @@ const defaultFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-
+  const [message, setMessage] = useState<MessageProps | null>(null);
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
@@ -33,7 +32,7 @@ const SignInForm = () => {
 
     try {
       const response = await signInAuthUserWithEmailAndPassword(email, password);
-
+      console.log("==>?response ==> ", response);
       resetFormFields();
     } catch (error: any) {
       switch (error.code) {
@@ -44,7 +43,11 @@ const SignInForm = () => {
           alert("no user associated with this email");
           break;
         default:
-          console.log(error);
+          setMessage({
+            type: "error",
+            content: error.code,
+            showTime: 3,
+          });
       }
     }
   };
@@ -55,8 +58,20 @@ const SignInForm = () => {
     setFormFields({ ...formFields, [name]: value });
   };
 
+  const handleDisappear = () => {
+    setMessage(null); // Update the state to reflect the message has disappeared
+  };
+
   return (
-    <div className="sign-up-container">
+    <div className="sign-in-container">
+      {message ? (
+        <Message
+          type={message.type}
+          content={message.content}
+          showTime={message.showTime}
+          onDisappear={handleDisappear}
+        />
+      ) : null}
       <h2>Already have an account?</h2>
       <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>

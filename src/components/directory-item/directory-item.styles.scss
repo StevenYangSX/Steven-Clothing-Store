@@ -1,6 +1,8 @@
+$card-margin: 10px;
+
 .directory-item-container {
   min-width: 30%;
-  height: 240px;
+  height: 40vh;
   flex: 1 1 auto;
   display: flex;
   align-items: center;
@@ -8,6 +10,26 @@
   border: 1px solid black;
   margin: 0 7.5px 15px;
   overflow: hidden;
+
+  @media (max-width: 900px) {
+    flex-basis: 47%; /* 2 cards per row */
+    height: 26vh;
+    max-width: calc(50% - #{$card-margin * 2}); /* Adjust max-width for smaller screens */
+  }
+
+  @media (max-width: 600px) {
+    height: 36vh;
+    flex-basis: 100%; /* 1 card per row */
+    max-width: 100%;
+  }
+
+  // background-color: #f0f0f0;
+  // border: 1px solid #ccc;
+  // flex: 1 1 30%; /* Initially, each card takes up 30% of the container width */
+  // max-width: calc(33.33% - 20px); /* Calculate max-width based on the margin */
+  // margin: 10px; /* Spacing around each card */
+  // padding: 20px;
+  // box-sizing: border-box; /* Include padding and border in width calculation */
 
   &:hover {
     cursor: pointer;

@@ -1,5 +1,5 @@
 import Home from "./routes/home/Home.component";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Navigation from "./routes/navigation/Navigation.component";
 import Authentication from "./routes/authentication/Authentication.component";
 import Shop from "./routes/shop/Shop.component";
@@ -11,15 +11,18 @@ import {
   createUserDocumentFromAuth,
   onAuthStateChangedListener,
 } from "./utils/firebase/firebase.util";
+import PaymentForm from "./components/payment-form/PaymentForm.component";
+import Payment from "./routes/payment/Payment.component";
 
 const App = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   useEffect(() => {
     const unsubscire = onAuthStateChangedListener((user: any) => {
-      // console.log("check obserber -> ", user);
+      console.log("check obserber -> ", user);
       if (user) {
         createUserDocumentFromAuth(user);
+        navigate("/");
       }
       dispatch(setCurrentUser(user));
     });
@@ -33,6 +36,7 @@ const App = () => {
         <Route path="shop/*" element={<Shop />} />
         <Route path="auth" element={<Authentication />} />
         <Route path="checkout" element={<Checkout />} />
+        <Route path="payment" element={<Payment />} />
       </Route>
     </Routes>
   );

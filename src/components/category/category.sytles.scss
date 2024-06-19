@@ -3,6 +3,14 @@
   grid-template-columns: repeat(4, 1fr);
   column-gap: 20px;
   row-gap: 50px;
+
+  @media (min-width: 601px) and (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr); // 2 cards per row
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr; // 1 card per row
+  }
 }
 
 .category-title {

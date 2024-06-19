@@ -16,11 +16,18 @@ export interface ProductType {
   imageUrl: string;
 }
 
+export interface CartStateType {
+  isCartOpen: boolean;
+  cartItems: Array<any>;
+  cartCount: number;
+  cartTotal: number;
+}
 
+export interface MessageProps {
+  type: MessageType;
+  content: string;
+  showTime?: number; // showTime is optional and defaults to 3 if not provided
+  onDisappear?: () => void; // Callback when the message disappears
+}
 
-export  interface CartStateType  {
-  isCartOpen: boolean,
-  cartItems: Array<any>,
-  cartCount: number,
-  cartTotal: number,
-};
+export type MessageType = "success" | "error";
